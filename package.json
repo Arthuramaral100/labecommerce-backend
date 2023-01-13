@@ -1,0 +1,21 @@
+{
+  "name": "labecommerce-bakend",
+  "version": "1.0.0",
+  "description": "Projeto labecommerce no backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arthuramaral100/labecommerce-bakend.git"
+  },
+  "author": "Arthur Amaral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arthuramaral100/labecommerce-bakend/issues"
+  },
+  "homepage": "https://github.com/Arthuramaral100/labecommerce-bakend#readme"
+}
