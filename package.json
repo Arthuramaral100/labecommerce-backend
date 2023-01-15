@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Projeto labecommerce no backend",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "start": "clear && tsc && node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Arthuramaral100/labecommerce-bakend/issues"
   },
-  "homepage": "https://github.com/Arthuramaral100/labecommerce-bakend#readme"
+  "homepage": "https://github.com/Arthuramaral100/labecommerce-bakend#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
 }
