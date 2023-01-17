@@ -1,5 +1,10 @@
 import { TPerson, TProduct, TPurchase } from "./types";
 
+enum categorys {
+    SITH = "Sith",
+    REBELS = "Rebels"
+}
+
 export const users: TPerson[] = [
     {
         id: "a001",
@@ -18,13 +23,13 @@ export const products: TProduct[] = [
         id:"p001",
         name:"POP! Darth Vader",
         price: 200,
-        category:"Sith"
+        category: categorys.SITH
     },
     {
         id:"p002",
         name:"POP! Princesa Leia",
         price: 200,
-        category:"Rebels"
+        category:categorys.REBELS
     }
 ]
 
