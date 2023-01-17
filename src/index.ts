@@ -71,7 +71,7 @@ app.post("/products", (req: Request, res: Response)=>{
     res.status(201).send("Produto cadastro com sucesso")
 })
 
-app.post("/puschases", (req: Request, res: Response) =>{
+app.post("/purchases", (req: Request, res: Response) =>{
     const userId = req.body.userId as string
     const productId = req.body.productId as string
     const quantity = req.body.quantity as number
@@ -87,3 +87,81 @@ app.post("/puschases", (req: Request, res: Response) =>{
     purchases.push(newPurchase)
     res.status(201).send("Compra realizada com sucesso")
 } )
+
+app.get("/product/:id", (req: Request, res: Response) =>{
+    const id = req.params.id as string
+
+    const result = products.filter((product)=>{
+        return product.id.includes(id)
+    })
+
+    res.status(200).send(result)
+})
+
+app.get("/users/:id/purchases", (req: Request, res: Response) =>{
+    const id = req.params.id as string
+
+    const result = purchases.filter((purchase)=>{
+        return purchase.userId.includes(id)
+    })
+
+    res.status(200).send(result)
+})
+
+app.delete("/users/:id", (req: Request, res: Response)=>{
+    
+    const id = req.params.id as string
+    
+    const userIndex = users.findIndex((user) => user.id === id)
+
+        if (userIndex >= 0) {
+        users.splice(userIndex, 1)
+        }
+        
+    res.status(200).send("User apagado com sucesso")
+})
+
+app.delete("/products/:id", (req: Request, res: Response)=>{
+    
+    const id = req.params.id as string
+    
+    const productIndex = products.findIndex((product) => product.id === id)
+
+        if (productIndex >= 0) {
+        products.splice(productIndex, 1)
+        }
+
+    res.status(200).send("Produto apagado com sucesso")
+})
+
+app.put("/users/:id", (req: Request, res: Response)=>{
+    const id = req.params.id as string
+    const newEmail = req.body.email as string | undefined
+    const newpassword = req.body.password as string | undefined
+
+    const user = users.find((user) => user.id === id) 
+
+    if (user) {
+        user.email = newEmail || user.email as string
+        user.password = newpassword || user.password as string
+    }
+
+    res.status(200).send("Cadastro atualizado com sucesso")
+})
+
+app.put("/products/:id", (req: Request, res: Response)=>{
+    const id = req.params.id
+    const newName = req.params.name as string | undefined
+    const newPrice = req.body.price as number | undefined
+    const newCategory = req.body.category as string | undefined
+
+    const product = products.find((product) => product.id === id) 
+
+    if (product) {
+        product.name = newName || product.name as string
+        product.price = newPrice || product.price as number
+        product.category = newCategory || product.category as string
+    }
+
+    res.status(200).send("Produto atualizado com sucesso")
+})
