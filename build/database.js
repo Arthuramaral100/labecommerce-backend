@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.purchases = exports.products = exports.users = void 0;
+var categorys;
+(function (categorys) {
+    categorys["SITH"] = "Sith";
+    categorys["REBELS"] = "Rebels";
+})(categorys || (categorys = {}));
 exports.users = [
     {
         id: "a001",
@@ -18,13 +23,13 @@ exports.products = [
         id: "p001",
         name: "POP! Darth Vader",
         price: 200,
-        category: "Sith"
+        category: categorys.SITH
     },
     {
         id: "p002",
         name: "POP! Princesa Leia",
         price: 200,
-        category: "Rebels"
+        category: categorys.REBELS
     }
 ];
 exports.purchases = [
