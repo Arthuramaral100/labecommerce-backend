@@ -18,7 +18,7 @@ CREATE TABLE products(
     category TEXT NOT NULL
 );
 
-INSERT INTO products
+INSERT INTO products (id, name, price, category)
 VALUES("p001", "POP! Darth Vader", 220, "Sith"),
         ("p002", "POP! Princesa Leia", 200, "Rebels"),
         ("p003", "POP! Han Solo", 200, "Rebels"),
@@ -33,4 +33,52 @@ VALUES("p001", "POP! Darth Vader", 220, "Sith"),
         ("p012", "Nave Star Destroyer - Metal", 280, "Sith"),
         ("p013", "Nave X-Wing Star Figther - Metal", 250, "Rebels"), 
         ("p014", "Nave Imperial TIE Fighter - Metal", 250, "Sith"),
-        ("p015", "C3PO & R2-D2 - Metal", 280, "Rebels")
+        ("p015", "C3PO & R2-D2 - Metal", 280, "Rebels");
+
+SELECT * FROM users;
+
+SELECT * FROM products;
+
+SELECT * FROM products
+WHERE name = "LightSaber Azul";
+
+INSERT INTO users (id, email, password)
+VALUES ("a004", "susu@gmail.com", "susu12345");
+
+INSERT INTO products (id, name, price, category)
+VALUES ("p016", "POP! Dark Rey", 220, "Sith"),
+        ("p017", "POP! Luke SkyWalker", 200, "Jedi"),
+        ("p018", "Máscara Darth Vader", 150, "Sith"),
+        ("p019", "LightSaber Roxo", 180, "Jedi"),
+        ("p020", "POP! Poe Dameron", 200, "Rebels"),
+        ("p021", "POP! Stormtrooper", 180, "Sith")
+;
+
+SELECT * FROM products
+WHERE id = "p013";
+
+DELETE FROM users
+WHERE id = "a004";
+
+DELETE FROM products
+WHERE id = "p016";
+
+UPDATE users
+SET email = "arthuramaral57@gmail.com"
+WHERE id = "a002";
+
+UPDATE products
+SET price = 200
+WHERE id = "p004";
+
+SELECT * FROM users
+ORDER BY email ASC;
+
+SELECT * FROM products
+ORDER BY price ASC
+LIMIT 20
+OFFSET 0;
+
+SELECT * FROM products
+WHERE price > 200 AND price < 300
+ORDER BY price ASC;
