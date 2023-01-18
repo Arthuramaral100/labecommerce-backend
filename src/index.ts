@@ -80,7 +80,7 @@ app.get("/product/search", (req: Request, res: Response) =>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
    
 })
@@ -138,7 +138,7 @@ app.post("/users", (req: Request, res: Response)=>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
     
 })
@@ -203,7 +203,7 @@ app.post("/products", (req: Request, res: Response)=>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
     
 })
@@ -295,7 +295,7 @@ app.post("/purchases", (req: Request, res: Response) =>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
     
 } )
@@ -330,7 +330,7 @@ app.get("/product/:id", (req: Request, res: Response) =>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
 })
 
@@ -362,7 +362,7 @@ app.get("/users/:id/purchases", (req: Request, res: Response) =>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
 })
 
@@ -396,7 +396,7 @@ app.delete("/users/:id", (req: Request, res: Response)=>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
 })
 
@@ -430,7 +430,7 @@ app.delete("/products/:id", (req: Request, res: Response)=>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
 })
 
@@ -482,7 +482,7 @@ app.put("/users/:id", (req: Request, res: Response)=>{
         if(res.statusCode === 200){
             res.status(500)
         }
-    res.send(error.message)
+    res.send(error)
     }
 })
 
@@ -539,6 +539,6 @@ app.put("/products/:id", (req: Request, res: Response)=>{
     if(res.statusCode === 200){
         res.status(500)
     }
-        res.send(error.message)
+        res.send(error)
     }
 })
