@@ -2,7 +2,6 @@
 import {users, products, purchases} from "./database"
 import express, {Request, Response} from "express"
 import cors from "cors"
-import { rmSync } from "fs"
 
 // console.log("O aplicativo está funcionando");
 // console.table(users)
