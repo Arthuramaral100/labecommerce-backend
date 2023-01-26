@@ -3,24 +3,30 @@
 CREATE TABLE
     users (
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
+        name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        createdAt TEXT DEFAULT (DATETIME('now', 'localtime')) NOT NULL
     );
 
+DROP TABLE users;
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    users(id, email, password)
+    users(id, name, email, password)
 VALUES (
         "a001",
+        "João",
         "joazinho@gmail.com",
         "joazinho123"
     ), (
         "a002",
+        "Arthur",
         "arthur@gmail.com",
         "arthur3010"
     ), (
         "a003",
+        "Brenda",
         "brendacfc@gmail.com",
         "1906brenda"
     );
@@ -32,84 +38,30 @@ CREATE TABLE
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
         name TEXT NOT NULL,
         price REAL NOT NULL,
-        category TEXT NOT NULL
+        category TEXT NOT NULL,
+        imageURL TEXT NOT NULL 
     );
 
+DROP TABLE products;
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    products (id, name, price, category)
-VALUES (
-        "p001",
-        "POP! Darth Vader",
-        220,
-        "Sith"
-    ), (
-        "p002",
-        "POP! Princesa Leia",
-        200,
-        "Rebels"
-    ), (
-        "p003",
-        "POP! Han Solo",
-        200,
-        "Rebels"
-    ), (
-        "p004",
-        "POP! Yoda",
-        180,
-        "Jedi"
-    ), (
-        "p005",
-        "POP! Kylo Ren",
-        220,
-        "Sith"
-    ), (
-        "p006",
-        "POP! Imperador Palpatine",
-        200,
-        "Sith"
-    ), ("p007", "POP! Rey", 200, "Jedi"), (
-        "p008",
-        "LightSaber Azul",
-        150,
-        "Jedi"
-    ), (
-        "p009",
-        "LightSaber Verde",
-        150,
-        "Jedi"
-    ), (
-        "p010",
-        "LightSaber Vermelho",
-        150,
-        "Sith"
-    ), (
-        "p011",
-        "Nave Millennium Falcom - Metal",
-        280,
-        "Rebels"
-    ), (
-        "p012",
-        "Nave Star Destroyer - Metal",
-        280,
-        "Sith"
-    ), (
-        "p013",
-        "Nave X-Wing Star Figther - Metal",
-        250,
-        "Rebels"
-    ), (
-        "p014",
-        "Nave Imperial TIE Fighter - Metal",
-        250,
-        "Sith"
-    ), (
-        "p015",
-        "C3PO & R2-D2 - Metal",
-        280,
-        "Rebels"
-    );
+    products (id, name, price, category, imageURL)
+VALUES ( "p001","POP! Darth Vader",220,"Sith", "imagem darth vader"), 
+        ("p002", "POP! Princesa Leia",200, "Rebels","imagem princesa leia"), 
+        ("p003","POP! Han Solo",200,"Rebels","imagem han solo"), 
+        ("p004","POP! Yoda",180, "Jedi","imagem yoda"), 
+        ("p005","POP! Kylo Ren",220,"Sith","imagem kylo ren"), 
+        ("p006","POP! Imperador Palpatine",200, "Sith", "imagem imperador"), 
+        ("p007", "POP! Rey", 200, "Jedi", "imagem rey"), 
+        ("p008","LightSaber Azul", 150,"Jedi", "imagem lightsaber azul"), 
+        ("p009","LightSaber Verde",150,"Jedi", "imagem lightsaber verde"), 
+        ("p010","LightSaber Vermelho",150,"Sith", "imagem lightsaber vermelho"), 
+        ("p011","Nave Millennium Falcom - Metal",280,"Rebels", "imagem millennium"), 
+        ("p012","Nave Star Destroyer - Metal",280,"Sith", "imagem star destroyer"), 
+        ("p013","Nave X-Wing Star Figther - Metal",250,"Rebels", "imagem x-wing"), 
+        ("p014","Nave Imperial TIE Fighter - Metal",250,"Sith", "imagem tie fighter"), 
+        ("p015","C3PO & R2-D2 - Metal",280,"Rebels", "imagem c3po");
 
 ------------------------------------------------------------------------------
 
@@ -126,9 +78,10 @@ SELECT * FROM products WHERE name = "LightSaber Azul";
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    users (id, email, password)
+    users (id, name, email, password)
 VALUES (
         "a004",
+        "Suelen",
         "susu@gmail.com",
         "susu12345"
     );
@@ -136,37 +89,43 @@ VALUES (
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    products (id, name, price, category)
+    products (id, name, price, category, imageURL)
 VALUES (
         "p016",
         "POP! Dark Rey",
         220,
-        "Sith"
+        "Sith",
+        "imagem dark rey"
     ), (
         "p017",
         "POP! Luke SkyWalker",
         200,
-        "Jedi"
+        "Jedi",
+        "imagem luke"
     ), (
         "p018",
         "Máscara Darth Vader",
         150,
-        "Sith"
+        "Sith",
+        "imagem mascara darth vader"
     ), (
         "p019",
         "LightSaber Roxo",
         180,
-        "Jedi"
+        "Jedi",
+        "imagem lightsaber roxo"
     ), (
         "p020",
         "POP! Poe Dameron",
         200,
-        "Rebels"
+        "Rebels",
+        "imagem poe"
     ), (
         "p021",
         "POP! Stormtrooper",
         180,
-        "Sith"
+        "Sith",
+        "imagem stormtrooper"
     );
 
 ------------------------------------------------------------------------------
@@ -214,11 +173,14 @@ CREATE TABLE
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
         total_price REAL NOT NULL,
         paid INTEGER NOT NULL,
-        delivered_at TEXT,
+        createdAt TEXT DEFAULT (DATETIME('now', 'localtime')) NOT NULL,
         buyer_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
         FOREIGN KEY (buyer_id) REFERENCES users (id)
+        FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
+DROP TABLE purchases;
 ------------------------------------------------------------------------------
 
 DELETE FROM purchases;
@@ -226,15 +188,13 @@ DELETE FROM purchases;
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    purchases (id, total_price, paid, buyer_id)
-VALUES ("c001", 400, 0, "a001"), ("c002", 350, 0, "a001"), ("c003", 550, 0, "a002"), ("c004", 200, 0, "a002"), ("c005", 280, 0, "a003"), ("c006", 440, 0, "a003");
-
-------------------------------------------------------------------------------
-
-UPDATE purchases
-SET
-    delivered_at = DATETIME('now')
-WHERE id = "c005";
+    purchases (id, total_price, paid, buyer_id, product_id)
+VALUES ("c001", 400, 0, "a001", "p017"), 
+("c002", 350, 0, "a001", "p002"), 
+("c003", 550, 0, "a002", "p010"), 
+("c004", 200, 0, "a002", "p005"), 
+("c005", 280, 0, "a003", "p013"), 
+("c006", 440, 0, "a003", "p008");
 
 ------------------------------------------------------------------------------
 
