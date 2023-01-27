@@ -38,7 +38,7 @@ CREATE TABLE
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
         name TEXT NOT NULL,
         price REAL NOT NULL,
-        category TEXT NOT NULL,
+        description TEXT NOT NULL,
         imageURL TEXT NOT NULL 
     );
 
@@ -46,7 +46,7 @@ DROP TABLE products;
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    products (id, name, price, category, imageURL)
+    products (id, name, price, description, imageURL)
 VALUES ( "p001","POP! Darth Vader",220,"Sith", "imagem darth vader"), 
         ("p002", "POP! Princesa Leia",200, "Rebels","imagem princesa leia"), 
         ("p003","POP! Han Solo",200,"Rebels","imagem han solo"), 
@@ -89,7 +89,7 @@ VALUES (
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    products (id, name, price, category, imageURL)
+    products (id, name, price, description, imageURL)
 VALUES (
         "p016",
         "POP! Dark Rey",
@@ -171,30 +171,29 @@ ORDER BY price ASC;
 CREATE TABLE
     purchases (
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
+        buyer_id TEXT NOT NULL,
         total_price REAL NOT NULL,
         paid INTEGER NOT NULL,
-        createdAt TEXT DEFAULT (DATETIME('now', 'localtime')) NOT NULL,
-        buyer_id TEXT NOT NULL,
-        product_id TEXT NOT NULL,
+        created_at TEXT DEFAULT (DATETIME('now', 'localtime')) NOT NULL,
         FOREIGN KEY (buyer_id) REFERENCES users (id)
-        FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
 DROP TABLE purchases;
 ------------------------------------------------------------------------------
+SELECT * FROM purchases;
 
 DELETE FROM purchases;
 
 ------------------------------------------------------------------------------
 
 INSERT INTO
-    purchases (id, total_price, paid, buyer_id, product_id)
-VALUES ("c001", 400, 0, "a001", "p017"), 
-("c002", 350, 0, "a001", "p002"), 
-("c003", 550, 0, "a002", "p010"), 
-("c004", 200, 0, "a002", "p005"), 
-("c005", 280, 0, "a003", "p013"), 
-("c006", 440, 0, "a003", "p008");
+    purchases (id, buyer_id, total_price, paid )
+VALUES ("c001", "a001", 400, 0), 
+("c002", "a001", 350, 0), 
+("c003", "a002", 550, 0), 
+("c004", "a002", 200, 0), 
+("c005", "a003", 280, 0), 
+("c006", "a003",  440, 0);
 
 ------------------------------------------------------------------------------
 
@@ -231,6 +230,7 @@ VALUES  ("c001", "p017", 3),
         ("c006", "p008", 2);
 
 ------------------------------------------------------------------------------
+SELECT * FROM purchases_products;
 
 DELETE FROM purchases_products;
 
